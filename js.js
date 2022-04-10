@@ -175,7 +175,7 @@ console.log(getmax(num[0], num[1], num[2], num[3], num[4])); */
 }
 console.log(reverse([1, 2, 3, 4, 5])); */
 
-function order(array) {
+/* function order(array) {
   for (let j = 0; j < array.length - 1; j++) {
     for (let i = 1; i < array.length; i++) {
       if (array[i] > array[i - 1]) {
@@ -187,4 +187,104 @@ function order(array) {
   }
   return array;
 }
-console.log(order([1, 2, 3, 5, 8, 9]));
+console.log(order([1, 2, 3, 5, 8, 9])); */
+/* if (3 < 5) {
+  var var_name = 3;
+}
+console.log(var_name); */
+/* var obg = {
+  uname: "zy",
+  sex: "na",
+  say: function () {
+    console.log("22");
+  },
+};
+obg.say();
+console.log(obg.sex); */
+/* var keke = {
+  kname: "可可",
+  type: "alasijia",
+  age: "15",
+  color: "zong",
+  skill: "brak",
+  skill2: "show",
+  printkeke: function () {
+    var all = [
+      this.kname,
+      this.type,
+      this.age,
+      this.color,
+      this.skill,
+      this.skill2,
+    ];
+    console.log(all);
+  },
+};
+
+console.log(keke); */
+/* var mingren = new Object();
+mingren.kname = "鸣人";
+mingren.sex = "男";
+mingren.age = 19;
+console.log(mingren); */
+/* function Hero(uname, type, blood, attack) {
+  this.name = uname;
+  this.type = type;
+  this.blood = blood;
+  this.attack = attack;
+}
+var lianpo = new Hero("lianpo", "liliang", "500", "jinzhan");
+console.log(lianpo);
+for (k in lianpo) {
+  console.log(lianpo[k]);
+}
+ */
+/* var obj = {
+  uname: "che",
+  weight: "110g",
+  color: "red",
+  laren: function () {
+    console.log("la");
+  },
+};
+var obj1 = new Object();
+obj1.uname = "zy";
+console.log(obj1);
+
+function Obj1(weight, color) {
+  this.weight = weight;
+  this.color = color;
+}
+
+var che1 = new Obj1(110, "red");
+console.log(che1); */
+function reverse() {
+  for (let i = 0; i < arguments.length; i++) {
+    for (j = 0; j < arguments.length - 1; j++) {
+      if (arguments[j + 1] > arguments[j]) {
+        var temp = arguments[j + 1];
+        arguments[j + 1] = arguments[j];
+        arguments[j] = temp;
+      }
+    }
+  }
+  return arguments;
+}
+console.log(reverse(1, 2, 3, 4, 5, 1, 5));
+
+function rev() {
+  for (let i = 0; i < arguments.length; i++) {
+    var temp = arguments[arguments.length - i - 1];
+    arguments[arguments.length - i - 1] = arguments[i];
+    arguments[i] = temp;
+  }
+  for (let i = 0; i < arguments.length; i++) {
+    console.log(arguments[i]);
+  }
+}
+rev(1, 2, 3, 4);
+var array = [1, 2, 3, 4];
+var temp = array[0];
+array[0] = array[3];
+array[3] = temp;
+console.log(array);
