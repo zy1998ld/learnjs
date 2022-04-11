@@ -29,7 +29,7 @@
 
 1. JavaScript 是运行在**客户端的脚本语言**，不需要编译，由 js 解释器进行**逐行**解释和执行但是也可通过*node.js*在服务器端执行
 
-*[逐行]:当报错时，后面的程序就不会在执行
+*[逐行]:当报错时，后面的程序就不会在执行*
 
 2. 浏览器分为两部分：渲染引擎和 js 引擎
 
@@ -90,7 +90,7 @@ dynamic:the type of data is not fixed but changed
    \==和\!= :全等号会转型，3=='3',返回 true
    \===和\!\== ：要求类型也要相等
 4. 逻辑运算符
-   ` &&:and ` ` ||:or ` `!:not`
+   `&&:and` `||:or` `!:not`
    - 逻辑短路&&：&&中左右表达式，如果左边是真则返回右边，若是否(0''NaN null undefined)则返回左边的原值，不是布尔值
    - 逻辑短路||:与&&相反，**短路了就不会再运行了**，var num=0<122 || num++ ,num 的值还是 0
 5. 赋值运算符
@@ -167,8 +167,7 @@ dynamic:the type of data is not fixed but changed
   }
   ```
 
-  !!!note 为了防止 while 死循环，需要在 while 里加计数器或操作表达式，如 i++ 
-  3. do while 循环
+  !!!note 为了防止 while 死循环，需要在 while 里加计数器或操作表达式，如 i++ 3. do while 循环
 
   ```javascript
   do {
@@ -176,9 +175,10 @@ dynamic:the type of data is not fixed but changed
   }while{条件语句}
   ```
 
-  do while 和 while 的不同点在于会先做一次循环体，然后再判断语句，循环体中也需要操表达式，而且一般也更加简单 
+  do while 和 while 的不同点在于会先做一次循环体，然后再判断语句，循环体中也需要操表达式，而且一般也更加简单
 
   4. 循环关键词
+
   - continue:退出本次循环，跳到下一次，需要注意循环中的代码顺
   - break:立即退出整个循环
 
@@ -227,33 +227,40 @@ function 函数名(行参,形参...){
 - 函数的另一种声明方式(匿名函数): var 函数名=function(){}
 
 ### 作用域
+
 指代码（变量）只在某个范围起作用，目的是减少命名冲突
+
 1. 分类：全局作用域、局部作用域、块级作用域（es6）（在{}中的，外部不能调用）
-   1. 全局作用域：对于整个js文件都有用
+   1. 全局作用域：对于整个 js 文件都有用
    2. 局部作用域：函数内部就是局部作用域，函数内部的变量命名只在函数中有用，不会与全局作用域相冲突
    3. 根据作用域可将变量分为全局变量和局部变量
-   全局变量只有在关闭浏览器才会失效，占资源
-   局部变量（函数内变量和形参）当执行完这段代码就失效，比较节省空间
+      全局变量只有在关闭浏览器才会失效，占资源
+      局部变量（函数内变量和形参）当执行完这段代码就失效，比较节省空间
 
-!!!note 当变量定义时没有var，则也会被当作全局变量
-2. 作用域链
+!!!note 当变量定义时没有 var，则也会被当作全局变量 2. 作用域链
 每段代码都会有作用域，内部作用域可以调用外部作用域，当作用域中继续加函数生成新的作用域时，变量查找方式的**就近链式查找原则**
 
 ### 预解析
-js引擎执行代码顺序：预解析+代码逐行执行。
-预解析会将var 和 function定义提到当前作用域的最前面。分为变量预解析和函数预解析
-1. 变量预解析：只会提升声明变量，不会提升赋值（函数定义第二种var fun=function这种也是变量）
-console.log(a);var a=0;相当于var a;console.log(a);a=10
+
+js 引擎执行代码顺序：预解析+代码逐行执行。
+预解析会将 var 和 function 定义提到当前作用域的最前面。分为变量预解析和函数预解析
+
+1. 变量预解析：只会提升声明变量，不会提升赋值（函数定义第二种 var fun=function 这种也是变量）
+   console.log(a);var a=0;相当于 var a;console.log(a);a=10
 2. 函数预解析：将函数提升到当前作用域的最前面
 
-!!!note var a=b=c=value相当于var a; a=b=c=value;b和c会被当作全局变量
+!!!note var a=b=c=value 相当于 var a; a=b=c=value;b 和 c 会被当作全局变量
 
 ### 对象
+
 对象是*无序*的**属性**和**方法**的集合（属性是特征，名词；方法是行为，动词）,对象一般用于保存一个事物的完整信息
+
 1. 创建对象的三种方式
-   1. 字面量{}：var obj={属性1:value,属性2:value, ... ,函数:function(){this.属性},}; 对象的属性是使用键对值的方式表示，中间用，隔开。调用用obj.属性来调用
+
+   1. 字面量{}：var obj={属性 1:value,属性 2:value, ... ,函数:function(){this.属性},}; 对象的属性是使用键对值的方式表示，中间用，隔开。调用用 obj.属性来调用
    2. new object:var obj=new object();obj.name=value;obj.sex=value...
    3. 利用构造函数创建：构造函数的包裹属性和方法，应用于对象含有相同的属性和方法，此方法也叫对象的实例化
+
    ```jsvascript
    function Star(uname, sex, age){
       this.name=uname;
@@ -262,15 +269,90 @@ console.log(a);var a=0;相当于var a;console.log(a);a=10
    }
    var zy= new Star('zy','sex',age);
    ```
-!!!note 1.为区分普通函数，构造函数的命名首字母需要大写，也没有return
-!!!note 2.构造函数属性需要加this，实参和形参数目也最好相等
-!!!note 3.构造函数调用需要加new
+
+   !!!note 1.为区分普通函数，构造函数的命名首字母需要大写，也没有 return
+   !!!note 2.构造函数属性需要加 this，实参和形参数目也最好相等
+   !!!note 3.构造函数调用需要加 new
 
 2. 遍历对象
-``` jacascript
+
+```jacascript
 for (变量(k) in obj){
    console.log(k); //遍历对象的属性名
    console.log(obj[k]);  //遍历对象的属性值
 }
 ```
 
+### 内置对象
+
+js 中的对象分类：ecmascript 中的对象（自定义对象，内置对象）和浏览器对象
+内置对象是 js 中自带的常用的对象：math、data、array、string
+
+1. Math 对象
+   math 对象不是构造函数，不需要 new. math.max max.random math.floor(max-min+1)+min
+2. Date 对象
+   Data 对象是一种构造函数，需要用 new 来调用
+   Date 中的 date.getmonth()返回的值是 0-11，即月份-1,星期日返回 0，所以构建根据星期构建数组的时候要先写周日
+
+!!!note 时间戳是距离 1970-01-01 的毫秒数 value.of()和 gettime()或者写 =+ new date() , date.now()也可以
+![时间戳](imgs/%E6%97%B6%E9%97%B4%E6%88%B3.png)
+
+3. 数组
+   内置对象创建数组的不同情况：
+   var array=new array()创建空数组；var array=new array(2)创建 2 个空元素的数组；var array=new array(2,3)创建[2,3]数组
+
+   1. 数组的两种检测方式
+  `instanceof` 是一种二元运算符,用于检测构造函数的属性是否在某个实例对象的原型链上，返回布尔值 [2,3] instanceof Array;
+  Array.isArray()也可用于检测，Array.isArray([2,5,3])
+   1.  添加删除数组元素
+         1. push(),在数组后面添加一个或者多个元素，完毕后返回的数组长度
+         1. unshift(),在数组前面前面加元素,多个元素用`，`隔开，返回数组长度
+         1. pop()删除数组最后的一个元素，不会加参数，**返回值是删除的元素**
+         1. shift()删除数组第一个元素，**返回值是删除的元素**
+   3.  数组排序
+      1. reverse()用于反转数组
+      2. sort()排序如果不指明比较函数就会按照 Unicode 方式将元素转换为字符串来进行排序，所以 12<2, ab<d;所以需要指明比较函数,将 a-b 换成 b-a 会降序排序
+         ![comparefunction](imgs/comparefunction.png)
+  4.  数组索引
+      indexof(,[开始的索引号])返回此元素的最小索引号，如果不存在就返回-1
+      lastindexof()返回此元素的最大索引号，如果不存在就返回-1
+      数组去重案例:用 indexof()来查询两个数组的重复元素
+
+```javascript
+function unique(arr) {
+  var arr_new = new Array();
+  for (let i = 0; i < arr.length; i++) {
+    if (arr_new.indexOf(arr[i]) === -1) {
+      arr_new.push(arr[i]);
+    }
+  }
+  return arr_new;
+}
+var arre = ["c", "a", "z", "a", "x", "a", "x", "c", "b"];
+console.log(unique(arre));
+```
+   5. 数组转换为字符串
+      1. toString():同变量 
+      2. join(分隔符):可用不同分隔符分割数组，如表单的&
+
+   5.  其他数组方法
+         1. concat():连接两个数组,arr1.concat(arr2)
+         2. slice(begin,end):返回 begin 和 end 之间截取的值,不包括end不会影响原数组
+         3. splice(a,b[,item1,item2])返回从 a 开始删除 b 个元素的值，删除后在此处插入item**会影响原数组**
+
+- 字符串
+字符串是基本包装类型(将简单数据类型转换成复杂数据类型，还有number和boolean)，所以string也有复杂数据类型的属性和方法
+var str='zy'相当于两步
+var temp = new String('zy');
+str = temp
+1. 字符串的不可变性
+字符串声明之后就会占用内存空间，变量重新赋值之后，只是指向了新的字符串，原来的字符串不会消失，所以比较占用内存。一般不得大量拼接字符串
+2. 字符串位置：同数组，索引号也和数组一样，indexof()和lastindexof()
+```javascript
+var str = "abcoefoxyozzopp";
+var index = str.indexOf("o");
+while (index !== -1) {
+  console.log(index);
+  index = str.indexOf("o", index + 1);
+}
+```

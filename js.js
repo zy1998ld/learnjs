@@ -258,7 +258,7 @@ function Obj1(weight, color) {
 
 var che1 = new Obj1(110, "red");
 console.log(che1); */
-function reverse() {
+/* function reverse() {
   for (let i = 0; i < arguments.length; i++) {
     for (j = 0; j < arguments.length - 1; j++) {
       if (arguments[j + 1] > arguments[j]) {
@@ -287,4 +287,99 @@ var array = [1, 2, 3, 4];
 var temp = array[0];
 array[0] = array[3];
 array[3] = temp;
-console.log(array);
+console.log(array); */
+/* function getint(min, max) {
+  min = Math.floor(min);
+  max = Math.ceil(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+console.log(getint(1.1, 9.8));
+ */
+/* function caishuzi(value) {
+  var value_r = Math.floor(Math.random() * 10) + 1;
+  for (let i = 1; i <= 10; i++) {
+    var value = prompt("shuzi");
+    if (value > value_r) {
+      alert("大了，还有" + (10 - i) + "次机会");
+    } else if (value < value_r) {
+      alert("小了,还有" + (10 - i) + "次机会");
+    } else {
+      break;
+    }
+  }
+}
+caishuzi(); */
+/* var today = new Date("1998-2-1 8:20:59");
+console.log(today);
+console.log(today.getMonth()); */
+
+/* function getdaojishhi() {
+  var enddate = +new Date("2022-4-13 00:00:00");
+  var now = +new Date();
+  var diff = enddate - now;
+  var diff_obj = {
+    day: parseInt(diff / (60 * 60 * 24) / 1000),
+    h: parseInt((diff / 1000 / (60 * 60)) % 24),
+    minute: parseInt((diff / 1000 / 60) % 60),
+    s: parseInt((diff / 1000) % 60),
+  };
+  diff_obj.day > 10 ? diff_obj.day : "0" + diff_obj.day;
+  return console.log(
+    diff_obj.day + " " + diff_obj.h + ":" + diff_obj.minute + ":" + diff_obj.s
+  );
+}
+getdaojishhi(); */
+/* var array = new Array(2, 3, 5, 8, 9);
+console.log(array.push(5, 2, 6));
+console.log(array); */
+/* var arr = new Array(1500, 12, 2000, 2100, 1800);
+var arr_ori = [];
+for (let i = 0; i < arr.length; i++) {
+  if (arr[i] < 2000) {
+    // arr_ori[arr_ori.length] = arr[i];
+    arr_ori.push(arr[i]);
+  }
+}
+console.log(arr_ori);
+console.log(arr.reverse());
+console.log(
+  arr.sort(function (a, b) {
+    return b - a;
+  })
+);
+arr.push(120);
+console.log(arr.indexOf(120));
+console.log(arr.lastIndexOf(120)); */
+/* for (let i = 0; i < arr.length; i++) {
+  var arr_new = [];
+  arr_new[i] = arr.indexOf(arr[i]);
+}
+console.log(arr_new); */
+/* function unique(arr) {
+  var arr_new = new Array();
+  for (let i = 0; i < arr.length; i++) {
+    if (arr_new.indexOf(arr[i]) === -1) {
+      arr_new.push(arr[i]);
+    }
+  }
+  return arr_new;
+}
+var arre = ["c", "a", "z", "a", "x", "a", "x", "c", "b"];
+console.log(unique(arre)); */
+/* var arre = ["c", "a", "z", "a", "x", "a", "x", "c", "b"];
+var arr2 = [1, 2];
+var arr_end = arr2.concat(arre);
+console.log(arr_end);
+var arr_splice = arr_end.splice(1, 5);
+console.log(arr_splice);
+var arr_slice = arr_end.slice(0, 4);
+console.log(arr_end);
+
+console.log(arr_slice);
+ */
+var str = "abcoefoxyozzopp";
+var index = str.indexOf("o");
+while (index !== -1) {
+  console.log(index);
+  index = str.indexOf("o", index + 1);
+}
