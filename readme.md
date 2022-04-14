@@ -1,7 +1,9 @@
 # css 学习之路 :mag:
 
 <details> 
-    <summary>目录</summary>
+<summary>目录</summary>
+   <details>
+   <summary>基础</summary>
 
 - [编程语言](#语言分类)
 - [javaScript](#javascript-简介)
@@ -14,7 +16,15 @@
 - [作用域](#作用域)
 - [预解析](#预解析)
 - [对象](#对象)
+- [内置对象](#内置对象)
+
+   </details>
+      <details>
+      <summary>Web APIs</summary>
+      </details>
 </details>
+
+## javascript 基础
 
 ### 语言分类
 
@@ -29,7 +39,7 @@
 
 1. JavaScript 是运行在**客户端的脚本语言**，不需要编译，由 js 解释器进行**逐行**解释和执行但是也可通过*node.js*在服务器端执行
 
-*[逐行]:当报错时，后面的程序就不会在执行*
+\*[逐行]:当报错时，后面的程序就不会在执行
 
 2. 浏览器分为两部分：渲染引擎和 js 引擎
 
@@ -283,8 +293,7 @@ for (变量(k) in obj){
 }
 ```
 
-### 内置对象
-
+### [内置对象](https://developer.mozilla.org/zh-CN/)
 js 中的对象分类：ecmascript 中的对象（自定义对象，内置对象）和浏览器对象
 内置对象是 js 中自带的常用的对象：math、data、array、string
 
@@ -302,21 +311,22 @@ js 中的对象分类：ecmascript 中的对象（自定义对象，内置对象
    var array=new array()创建空数组；var array=new array(2)创建 2 个空元素的数组；var array=new array(2,3)创建[2,3]数组
 
    1. 数组的两种检测方式
-  `instanceof` 是一种二元运算符,用于检测构造函数的属性是否在某个实例对象的原型链上，返回布尔值 [2,3] instanceof Array;
-  Array.isArray()也可用于检测，Array.isArray([2,5,3])
-   1.  添加删除数组元素
-         1. push(),在数组后面添加一个或者多个元素，完毕后返回的数组长度
-         1. unshift(),在数组前面前面加元素,多个元素用`，`隔开，返回数组长度
-         1. pop()删除数组最后的一个元素，不会加参数，**返回值是删除的元素**
-         1. shift()删除数组第一个元素，**返回值是删除的元素**
-   3.  数组排序
-      1. reverse()用于反转数组
-      2. sort()排序如果不指明比较函数就会按照 Unicode 方式将元素转换为字符串来进行排序，所以 12<2, ab<d;所以需要指明比较函数,将 a-b 换成 b-a 会降序排序
-         ![comparefunction](imgs/comparefunction.png)
-  4.  数组索引
-      indexof(,[开始的索引号])返回此元素的最小索引号，如果不存在就返回-1
-      lastindexof()返回此元素的最大索引号，如果不存在就返回-1
-      数组去重案例:用 indexof()来查询两个数组的重复元素
+      `instanceof` 是一种二元运算符,用于检测构造函数的属性是否在某个实例对象的原型链上，返回布尔值 [2,3] instanceof Array;
+      Array.isArray()也可用于检测，Array.isArray([2,5,3])
+   1. 添加删除数组元素
+      1. push(),在数组后面添加一个或者多个元素，完毕后返回的数组长度
+      1. unshift(),在数组前面前面加元素,多个元素用`，`隔开，返回数组长度
+      1. pop()删除数组最后的一个元素，不会加参数，**返回值是删除的元素**
+      1. shift()删除数组第一个元素，**返回值是删除的元素**
+   1. 数组排序
+   1. reverse()用于反转数组
+   1. sort()排序如果不指明比较函数就会按照 Unicode 方式将元素转换为字符串来进行排序，所以 12<2, ab<d;所以需要指明比较函数,将 a-b 换成 b-a 会降序排序
+      ![comparefunction](imgs/comparefunction.png)
+
+4. 数组索引
+   indexof(,[开始的索引号])返回此元素的最小索引号，如果不存在就返回-1
+   lastindexof()返回此元素的最大索引号，如果不存在就返回-1
+   数组去重案例:用 indexof()来查询两个数组的重复元素
 
 ```javascript
 function unique(arr) {
@@ -331,23 +341,27 @@ function unique(arr) {
 var arre = ["c", "a", "z", "a", "x", "a", "x", "c", "b"];
 console.log(unique(arre));
 ```
-   5. 数组转换为字符串
-      1. toString():同变量 
-      2. join(分隔符):可用不同分隔符分割数组，如表单的&
 
-   5.  其他数组方法
-         1. concat():连接两个数组,arr1.concat(arr2)
-         2. slice(begin,end):返回 begin 和 end 之间截取的值,不包括end不会影响原数组
-         3. splice(a,b[,item1,item2])返回从 a 开始删除 b 个元素的值，删除后在此处插入item**会影响原数组**
+5. 数组转换为字符串
+
+   1. toString():同变量
+   2. join(分隔符):可用不同分隔符分割数组，如表单的&
+
+6. 其他数组方法
+   1. concat():连接两个数组,arr1.concat(arr2)
+   2. slice(begin,end):返回 begin 和 end 之间截取的值,不包括 end 不会影响原数组
+   3. splice(a,b[,item1,item2])返回从 a 开始删除 b 个元素的值，删除后在此处插入 item**会影响原数组**
 
 - 字符串
-字符串是基本包装类型(将简单数据类型转换成复杂数据类型，还有number和boolean)，所以string也有复杂数据类型的属性和方法
-var str='zy'相当于两步
-var temp = new String('zy');
-str = temp
+  字符串是基本包装类型(将简单数据类型转换成复杂数据类型，还有 number 和 boolean)，所以 string 也有复杂数据类型的属性和方法
+  var str='zy'相当于两步
+  var temp = new String('zy');
+  str = temp
+
 1. 字符串的不可变性
-字符串声明之后就会占用内存空间，变量重新赋值之后，只是指向了新的字符串，原来的字符串不会消失，所以比较占用内存。一般不得大量拼接字符串
-2. 字符串位置：同数组，索引号也和数组一样，indexof()和lastindexof()
+   字符串声明之后就会占用内存空间，变量重新赋值之后，只是指向了新的字符串，原来的字符串不会消失，所以比较占用内存。一般不得大量拼接字符串
+2. 字符串位置：同数组，索引号也和数组一样，indexof()和 lastindexof()
+
 ```javascript
 var str = "abcoefoxyozzopp";
 var index = str.indexOf("o");
@@ -356,3 +370,52 @@ while (index !== -1) {
   index = str.indexOf("o", index + 1);
 }
 ```
+
+3. 字符串位置返回字符：str.charAt(index),str.charCodeAt(index)返回对应字符的 ASCII 码（用于判断键盘按键），str[index]同第一个,只是兼容性问题
+
+```javascript
+var str = new String("abcoefoxyozzopp");
+var obj = {};
+console.log(str[1]);
+for (let i = 0; i < str.length; i++) {
+  var index = str.charAt(i);
+  if (obj[index]) {
+    obj[index]++;
+  } else {
+    obj[index] = 1;
+  }
+}
+console.log(obj);
+var max_value = 0;
+var max_char = "";
+for (let k in obj) {
+  if (obj[k] > max_value) {
+    max_value = obj[k];
+    max_char = k;
+  }
+}
+console.log(max_value);
+console.log(max_char);
+```
+
+4. 字符串的操作
+   1. concat()同数组，但是'+'更常用
+   2. substring(startindex,endindex)同数组的 slice(也不会取到 end)，NaN 和<0 的值都被认为 0，两个 index 可交换位置
+   3. replace()替换：replace('str1','str2'),替换 str1 为 str2，但是只会替换原字符串的第一个 str1，输出替换后的字符串，但是原字符串不会改变，后续替换用 while 循环
+   4. split('str'[,limit])将字符串按照 str 来分割后返回数组，limit 限制返回数组的个数
+   5. touppercase()/tolowercase()进行大小写强制转换
+
+- 简单数据类型和复杂数据
+
+1. 数据类型的内存分配：
+   1. 简单数据类型又叫值类型，存储的是值，包含 5 类（string，number，Boolean，null 空对象，undefined）
+   2. 复杂数据类型存储的地址，需要用 new 来引用，array，object，date 等
+   3. 内存由栈和堆组成，简单数据放在栈里，复杂数据放在堆里，定义之后先将地址按照 16 进制存储在栈里，然后由地址指向堆
+      ![内存分配](imgs/%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D.png)
+   4. 数据传参
+      简单数据传递值
+      ![简单数据](imgs/%E7%AE%80%E5%8D%95%E6%95%B0%E6%8D%AE.png)
+      复杂数据传递地址：形参和实参实际保存的是同一个地址，当形参的堆数据变化之后，实参根据相同地址指向的数据就会同形参的堆数据。这个结果是刘，刘，张，张(形参的堆数据变化了)
+      ![复杂数据](imgs/%E5%A4%8D%E6%9D%82%E6%95%B0%E6%8D%AE.png)
+
+## Web API

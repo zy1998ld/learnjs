@@ -377,9 +377,79 @@ console.log(arr_end);
 
 console.log(arr_slice);
  */
-var str = "abcoefoxyozzopp";
+/* var str = "abcoefoxyozzopp";
 var index = str.indexOf("o");
 while (index !== -1) {
   console.log(index);
   index = str.indexOf("o", index + 1);
+} */
+// var str = new String("abcoefoxyozzopp");
+/* var obj = {};
+console.log(str[1]);
+for (let i = 0; i < str.length; i++) {
+  var index = str.charAt(i);
+  if (obj[index]) {
+    obj[index]++;
+  } else {
+    obj[index] = 1;
+  }
 }
+console.log(obj);
+var max_value = 0;
+var max_char = "";
+for (let k in obj) {
+  if (obj[k] > max_value) {
+    max_value = obj[k];
+    max_char = k;
+  }
+}
+console.log(max_value);
+console.log(max_char);
+console.log(str.substring(1, 0)); */
+// console.log(str);
+/* while (str.indexOf("o") !== -1) {
+  str = str.replace("o", "*");
+}
+console.log(str);
+console.log(str.replace(/[^*]/, "o"));
+ */
+const str = "abaasdffggghhjjkkgfddsssss3444343";
+var obj = {
+  0: 0,
+  1: 1,
+  2: 2,
+  4: 4,
+};
+console.log(str.length);
+for (i in obj) {
+  console.log(str[i] + "\n");
+}
+console.log(str.indexOf("i"));
+console.log(str.lastIndexOf("a"));
+console.log(str.replace("g", "22"));
+var str_rep = str;
+while (str_rep.indexOf("g") !== -1) {
+  str_rep = str_rep.replace("g", 22);
+}
+console.log(str_rep);
+console.log(str.substring(1, 5));
+var obj_max = {};
+for (let i = 0; i < str.length; i++) {
+  if (obj_max[str[i]]) {
+    obj_max[str[i]]++;
+  } else {
+    obj_max[str[i]] = 1;
+  }
+}
+
+console.log(obj_max);
+var max_value = 0;
+var max_char = "";
+for (let k in obj_max) {
+  if (obj_max[k] > max_value) {
+    max_value = obj_max[k];
+    max_char = k;
+  }
+}
+console.log(max_value);
+console.log("最大的字符" + max_char);
