@@ -413,7 +413,7 @@ console.log(str.substring(1, 0)); */
 console.log(str);
 console.log(str.replace(/[^*]/, "o"));
  */
-const str = "abaasdffggghhjjkkgfddsssss3444343";
+/* const str = "abaasdffggghhjjkkgfddsssss3444343";
 var obj = {
   0: 0,
   1: 1,
@@ -452,4 +452,10 @@ for (let k in obj_max) {
   }
 }
 console.log(max_value);
-console.log("最大的字符" + max_char);
+console.log("最大的字符" + max_char); */
+/* var btnEle = document.getElementsByTagName("button");
+console.log(btnEle); */
+/* btnEle.onclick = function () {
+  alert("点击");
+};
+ */

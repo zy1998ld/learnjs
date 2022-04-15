@@ -419,3 +419,38 @@ console.log(max_char);
       ![复杂数据](imgs/%E5%A4%8D%E6%9D%82%E6%95%B0%E6%8D%AE.png)
 
 ## Web API
+API：应用程序编程接口，是一些预先定义的函数，帮助实现某种功能
+Web API：是操作浏览器功能和页面元素的API
+
+### DOM
+文档对象模型，是处理html或者xml的标准程序接口，改变网页的内容、结构、样式
+1. DOM树，一种树形结构，一个页面就是一个文档(document)，标签就是元素(element)，网页中所有的内容都是节点(node)，**所有的内容都可看作对象**,
+
+!!!note 整个文档是从上到下进行解释，所以script应该是写在元素下面才对
+![DOM树](imgs/DOM%E6%A0%91.png)
+1. 获取元素
+   1. 通过id:`document.getElementById('id')`获取一个元素对象
+   2. 通过标签名:`document.getElementByTagName('tag')`返回一个包含所有此标签的动态伪数组，对象会跟随html变化，就算没有此标签也还是会返回伪数组（空）
+   `element.getElementByTagName('tag')`父元素必须是指定的[数组]单元素，不能是伪数组等。一般是将父元素用id获取后再作为父元素获取后续标签
+   3. 通过类名:`document.getElementByClassName('class')`返回一个伪数组
+   4. 通过选择器:`document.querySelector('.class/#id/div')`返回**第一个元素对象**
+   `document.querySelectorAll()`返回一个伪数组
+   5. 特殊元素：document.body()和document.documentelement()获取body和html
+1. 事件：JavaScript可以检测到的行为
+   三要素：事件源、事件类型和事件处理程序
+   - 事件源：事件发生的对象
+   - 事件类型：点击、经过、键盘按下
+   - 事件处理程序：函数方式处理
+   ```javascript
+   var btnEle=document.getElementById('btn');
+   btnEle.onclick= function(){
+   alert('点击')
+   }
+   ```
+1. 操作元素
+   1. 修改元素内容：`element.innertext [= '']`和`element.innerhtml [= '']`都可以获取或者修改元素内部文字，前一个不识别html标签，并且会去除空格换行，后一个识别，并且保留原格式
+   2. 常用的属性修改:`element.propety`可以修改常见的src，herf，title等属性
+   3. 表单属性修改:type,value,checked,selected,disabled
+   4. 样式修改:element.style.propety = '' 修改后是产生在原html中产生行内样式，所以权重会高于css
+
+

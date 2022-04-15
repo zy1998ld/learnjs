@@ -6,6 +6,78 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>javascript</title>
     <script src="js.js"></script>
+    <script src="https://use.fontawesome.com/99424c1e2c.js"></script>
+    <style>
+      * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+      .load {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        width: 400px;
+        margin: 300px auto;
+        position: relative;
+        height: 30px;
+      }
+      .load input {
+        width: 250px;
+        border: none;
+        outline: none;
+        padding-left: 20px;
+      }
+      .load img {
+        position: absolute;
+        right: 5px;
+        width: 30px;
+        height: 20px;
+        top: 0px;
+      }
+      .box {
+        margin: 0 auto;
+        width: 100px;
+        position: relative;
+      }
+      .box img {
+        width: 70px;
+      }
+      .box i {
+        position: absolute;
+        left: -13px;
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <div class="load">
+      <label for="">密码</label>
+      <input type="password" name="" id="" placeholder="输入密码" />
+      <label for=""></label>
+      <a href="#"><img src="imgs/arria.jpg!ys" alt="" /></a>
+    </div>
+    <div class="box">
+      <img src="imgs/eye.png" alt="" / id="eye">
+      <a href="#"><i class="fa fa-minus-square" aria-hidden="true"></i></a>
+    </div>
+    <script>
+      var eyeEle = document.querySelector("img");
+      var inputEle = document.querySelector("input");
+      var flag = 0;
+      eyeEle.onclick = function () {
+        if (flag == 0) {
+          inputEle.type = Text;
+          eyeEle.src = "imgs/eye.png";
+          flag = 1;
+        } else {
+          inputEle.type = "password";
+          flag = 0;
+          eyeEle.src = "imgs/arria.jpg!ys";
+        }
+      };
+      var remove = document.querySelector(".fa-minus-square");
+      var pic = document.querySelector(".box");
+      remove.onclick = function () {
+        pic.style.display = "none";
+      };
+    </script>
+  </body>
 </html>
