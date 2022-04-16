@@ -439,7 +439,7 @@ Web API：是操作浏览器功能和页面元素的API
 1. 事件：JavaScript可以检测到的行为
    三要素：事件源、事件类型和事件处理程序
    - 事件源：事件发生的对象
-   - 事件类型：点击、经过、键盘按下
+   - 事件类型：点击(onclick)、经过、键盘按下、获得焦点(onfocus onblur注意颜色的变化调整)
    - 事件处理程序：函数方式处理
    ```javascript
    var btnEle=document.getElementById('btn');
@@ -447,10 +447,16 @@ Web API：是操作浏览器功能和页面元素的API
    alert('点击')
    }
    ```
-1. 操作元素
+1. 操作元素(注意this的使用)
    1. 修改元素内容：`element.innertext [= '']`和`element.innerhtml [= '']`都可以获取或者修改元素内部文字，前一个不识别html标签，并且会去除空格换行，后一个识别，并且保留原格式
    2. 常用的属性修改:`element.propety`可以修改常见的src，herf，title等属性
    3. 表单属性修改:type,value,checked,selected,disabled
-   4. 样式修改:element.style.propety = '' 修改后是产生在原html中产生行内样式，所以权重会高于css
+   4. 样式修改:
+   element.style.propety = '' 修改后是产生在原html中产生行内样式，所以权重会高于css
+   element.className = 'className'通过修改element的class属性(css要先写好，同时覆盖之前的class，不覆盖的话几个class之间空格隔开)达到效果(没有.)
+   5. 排他思想(需要用到双重循环)
+   利用for循环遍历所有的伪数组添加事件,注意使用this
+   去除同类型的所有样式(利用for循环遍历)
+   再设置当前的样式
 
 
