@@ -78,6 +78,48 @@
         -webkit-transform: scale(1.2);
         transform: scale(1.2);
       }
+      table {
+        margin: 0px auto;
+        width: 900px;
+        border-collapse: collapse;
+        /* 去除空隙 */
+      }
+      thead th {
+        height: 40px;
+        background-color: skyblue;
+        padding: 2px 15px;
+        justify-content: center;
+      }
+      tbody tr {
+        height: 30px;
+      }
+      tbody td {
+        border-bottom: 1px solid #d7d7d7;
+        text-align: center;
+        padding: 20px 2px;
+      }
+      .bg {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+      .tab-list li {
+        display: inline-block;
+        width: 70px;
+        cursor: pointer;
+        list-style: none;
+        text-align: center;
+      }
+      .tab-content {
+        height: 100px;
+      }
+      .tab-content div {
+        display: none;
+      }
+      .current {
+        background-color: red;
+      }
+      .tab-content .currentcontent {
+        display: block;
+      }
     </style>
   </head>
   <body>
@@ -108,6 +150,99 @@
         <li></li>
       </ul>
     </div>
+    <table>
+      <thead>
+        <th><input type="checkbox" id="checkall" /></th>
+
+        <th>代码</th>
+        <th>名称</th>
+        <th>最新公布净值</th>
+        <th>累计净值</th>
+        <th>前单位净值</th>
+        <th>净值增长率</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td>003526</td>
+          <td>3个月定期</td>
+          <td>1.075</td>
+          <td>1.079</td>
+          <td>1.074</td>
+          <td>+0.047%</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td>003526</td>
+          <td>3个月定期</td>
+          <td>1.075</td>
+          <td>1.079</td>
+          <td>1.074</td>
+          <td>+0.047%</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td>003526</td>
+          <td>3个月定期</td>
+          <td>1.075</td>
+          <td>1.079</td>
+          <td>1.074</td>
+          <td>+0.047%</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td>003526</td>
+          <td>3个月定期</td>
+          <td>1.075</td>
+          <td>1.079</td>
+          <td>1.074</td>
+          <td>+0.047%</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td>003526</td>
+          <td>3个月定期</td>
+          <td>1.075</td>
+          <td>1.079</td>
+          <td>1.074</td>
+          <td>+0.047%</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td>003526</td>
+          <td>3个月定期</td>
+          <td>1.075</td>
+          <td>1.079</td>
+          <td>1.074</td>
+          <td>+0.047%</td>
+        </tr>
+        <tr>
+          <td><input type="checkbox" /></td>
+          <td>003526</td>
+          <td>3个月定期</td>
+          <td>1.075</td>
+          <td>1.079</td>
+          <td>1.074</td>
+          <td>+0.047%</td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="tab">
+      <div class="tab-list">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+      </div>
+      <div class="tab-content">
+        <div>第1个模块</div>
+        <div>第2个模块</div>
+        <div>第3个模块</div>
+        <div>第4个模块</div>
+        <div>第5个模块</div>
+      </div>
+    </div>
     <script>
       var eyeEle = document.querySelector("img");
       var inputEle = document.querySelector("input");
@@ -127,7 +262,7 @@
       var remove = document.querySelector(".fa-minus-square");
       var pic = document.querySelector(".box");
       remove.onclick = function () {
-        pic.style.display = "none";
+        pic.style.visibility = "hidden";
       };
       var logEle = document.querySelector(".hoverpic").querySelectorAll("li");
       for (let i = 0; i < logEle.length; i++) {
@@ -162,6 +297,50 @@
           pas_ver.innerText = "";
         }
       };
+      var trs = document.querySelector("tbody").querySelectorAll("tr");
+      for (let i = 0; i < trs.length; i++) {
+        trs[i].onmouseover = function () {
+          this.className = "bg";
+        };
+        trs[i].onmouseout = function () {
+          this.className = "";
+        };
+      }
+      var check_all = document.getElementById("checkall");
+      var check_sim = document
+        .querySelector("tbody")
+        .getElementsByTagName("input");
+      check_all.onclick = function () {
+        for (let i = 0; i < check_sim.length; i++) {
+          check_sim[i].checked = this.checked;
+        }
+      };
+      for (let i = 0; i < check_sim.length; i++) {
+        check_sim[i].onclick = function () {
+          var flag = true;
+          for (let i = 0; i < check_sim.length; i++) {
+            if (!check_sim[i].checked) {
+              flag = false;
+              break;
+            }
+          }
+          check_all.checked = flag;
+        };
+      }
+      var tab_list = document.querySelector(".tab-list").querySelectorAll("li");
+      var tab_content = document
+        .querySelector(".tab-content")
+        .querySelectorAll("div");
+      for (let i = 0; i < tab_list.length; i++) {
+        tab_list[i].onclick = function () {
+          for (let i = 0; i < tab_list.length; i++) {
+            tab_list[i].removeAttribute("class");
+            tab_content[i].removeAttribute("class");
+          }
+          tab_list[i].setAttribute("class", "current");
+          tab_content[i].setAttribute("class", "currentcontent");
+        };
+      }
     </script>
   </body>
 </html>

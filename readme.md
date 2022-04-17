@@ -1,4 +1,4 @@
-# css 学习之路 :mag:
+# css 学习之路 [:mag:](index.html)
 
 <details> 
 <summary>目录</summary>
@@ -21,6 +21,7 @@
    </details>
       <details>
       <summary>Web APIs</summary>
+* [DOM](#dom)
       </details>
 </details>
 
@@ -294,6 +295,7 @@ for (变量(k) in obj){
 ```
 
 ### [内置对象](https://developer.mozilla.org/zh-CN/)
+
 js 中的对象分类：ecmascript 中的对象（自定义对象，内置对象）和浏览器对象
 内置对象是 js 中自带的常用的对象：math、data、array、string
 
@@ -419,44 +421,70 @@ console.log(max_char);
       ![复杂数据](imgs/%E5%A4%8D%E6%9D%82%E6%95%B0%E6%8D%AE.png)
 
 ## Web API
+
 API：应用程序编程接口，是一些预先定义的函数，帮助实现某种功能
-Web API：是操作浏览器功能和页面元素的API
+Web API：是操作浏览器功能和页面元素的 API
 
 ### DOM
-文档对象模型，是处理html或者xml的标准程序接口，改变网页的内容、结构、样式
-1. DOM树，一种树形结构，一个页面就是一个文档(document)，标签就是元素(element)，网页中所有的内容都是节点(node)，**所有的内容都可看作对象**,
 
-!!!note 整个文档是从上到下进行解释，所以script应该是写在元素下面才对
+文档对象模型，是处理 html 或者 xml 的标准程序接口，改变网页的内容、结构、样式
+
+1. DOM 树，一种树形结构，一个页面就是一个文档(document)，标签就是元素(element)，网页中所有的内容都是节点(node)，**所有的内容都可看作对象**,
+
+!!!note 整个文档是从上到下进行解释，所以 script 应该是写在元素下面才对
 ![DOM树](imgs/DOM%E6%A0%91.png)
+
 1. 获取元素
-   1. 通过id:`document.getElementById('id')`获取一个元素对象
-   2. 通过标签名:`document.getElementByTagName('tag')`返回一个包含所有此标签的动态伪数组，对象会跟随html变化，就算没有此标签也还是会返回伪数组（空）
-   `element.getElementByTagName('tag')`父元素必须是指定的[数组]单元素，不能是伪数组等。一般是将父元素用id获取后再作为父元素获取后续标签
+   1. 通过 id:`document.getElementById('id')`获取一个元素对象
+   2. 通过标签名:`document.getElementByTagName('tag')`返回一个包含所有此标签的动态伪数组，对象会跟随 html 变化，就算没有此标签也还是会返回伪数组（空）
+      `element.getElementByTagName('tag')`父元素必须是指定的[数组]单元素，不能是伪数组等。一般是将父元素用 id 获取后再作为父元素获取后续标签
    3. 通过类名:`document.getElementByClassName('class')`返回一个伪数组
    4. 通过选择器:`document.querySelector('.class/#id/div')`返回**第一个元素对象**
-   `document.querySelectorAll()`返回一个伪数组
-   5. 特殊元素：document.body()和document.documentelement()获取body和html
-1. 事件：JavaScript可以检测到的行为
+      `document.querySelectorAll()`返回一个伪数组
+   5. 特殊元素：document.body()和 document.documentelement()获取 body 和 html
+1. 事件：JavaScript 可以检测到的行为
    三要素：事件源、事件类型和事件处理程序
    - 事件源：事件发生的对象
-   - 事件类型：点击(onclick)、经过、键盘按下、获得焦点(onfocus onblur注意颜色的变化调整)
+   - 事件类型：点击(onclick)、经过、键盘按下、获得焦点(onfocus onblur 注意颜色的变化调整)
    - 事件处理程序：函数方式处理
    ```javascript
-   var btnEle=document.getElementById('btn');
-   btnEle.onclick= function(){
-   alert('点击')
-   }
+   var btnEle = document.getElementById("btn");
+   btnEle.onclick = function () {
+     alert("点击");
+   };
    ```
-1. 操作元素(注意this的使用)
-   1. 修改元素内容：`element.innertext [= '']`和`element.innerhtml [= '']`都可以获取或者修改元素内部文字，前一个不识别html标签，并且会去除空格换行，后一个识别，并且保留原格式
-   2. 常用的属性修改:`element.propety`可以修改常见的src，herf，title等属性
+1. 操作元素(注意 this 的使用)
+   1. 修改元素内容：`element.innertext [= '']`和`element.innerhtml [= '']`都可以获取或者修改元素内部文字，前一个不识别 html 标签，并且会去除空格换行，后一个识别，并且保留原格式
+   2. 常用的属性修改:`element.propety`可以修改常见的 src，herf，title 等属性
    3. 表单属性修改:type,value,checked,selected,disabled
    4. 样式修改:
-   element.style.propety = '' 修改后是产生在原html中产生行内样式，所以权重会高于css
-   element.className = 'className'通过修改element的class属性(css要先写好，同时覆盖之前的class，不覆盖的话几个class之间空格隔开)达到效果(没有.)
+      element.style.propety = '' 修改后是产生在原 html 中产生行内样式，所以权重会高于 css
+      element.className = 'className'通过修改 element 的 class 属性(css 要先写好，同时覆盖之前的 class，不覆盖的话几个 class 之间空格隔开)达到效果(没有.)
    5. 排他思想(需要用到双重循环)
-   利用for循环遍历所有的伪数组添加事件,注意使用this
-   去除同类型的所有样式(利用for循环遍历)
-   再设置当前的样式
-
-
+      利用 for 循环遍历所有的伪数组添加事件,注意使用 this
+      去除同类型的所有样式(利用 for 循环遍历)
+      再设置当前的样式
+   6. 表单全选框
+   ```javascript
+      for (let i = 0; i < check_sim.length; i++) {
+         check_sim[i].checked = this.checked;
+        }
+      };
+      for (let i = 0; i < check_sim.length; i++) {
+        check_sim[i].onclick = function () {
+          var flag = true;    //flag变量用于获取全选的状态
+          for (let i = 0; i < check_sim.length; i++) {
+            if (!check_sim[i].checked) {  //表单.checked返回的是布尔值，可以直接当作判断语句
+              flag = false;
+              break;  //只要不满足就不需要再判断了，所以用break退出循环
+            }
+          }
+          check_all.checked = flag;
+        };
+      }
+   ```
+   7. 获取属性：
+      element.属性 只能获取内置固定属性(类是 className)
+      element.getAttribute('属性')(类是 class)可以获取开发中的自定义属性，element.setAttribute('属性','值')可以修改自定义属性,element.removeAttribute('属性')
+   8. 自定义属性：获取和使用数据
+      标准格式是'data-属性'，这种格式的属性放在 dataset 这个集合中，可通过`element.dataset.属性`来获得。对于长的属性名，如 data-index-name:''这种还有-的属性名，应该用 element.dataset.indexName 来获得(驼峰命名法)
