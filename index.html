@@ -75,8 +75,8 @@
       .hvr-grow:hover,
       .hvr-grow:focus,
       .hvr-grow:active {
-        -webkit-transform: scale(1.2);
-        transform: scale(1.2);
+        -webkit-transform: scale(1.15);
+        transform: scale(1.15);
       }
       table {
         margin: 0px auto;
@@ -101,15 +101,21 @@
       .bg {
         background-color: rgba(0, 0, 0, 0.1);
       }
+      .tab {
+        display: block;
+        margin: 0px auto;
+        width: 490px;
+      }
       .tab-list li {
         display: inline-block;
-        width: 70px;
+        width: 80px;
         cursor: pointer;
         list-style: none;
         text-align: center;
       }
       .tab-content {
         height: 100px;
+        text-align: center;
       }
       .tab-content div {
         display: none;
@@ -119,6 +125,68 @@
       }
       .tab-content .currentcontent {
         display: block;
+      }
+      .nav {
+        width: 50%;
+        margin: 0 auto;
+        text-align: center;
+      }
+      a {
+        text-decoration: none;
+      }
+      .nav ul li {
+        display: inline-block;
+        list-style: none;
+        color: #999;
+        position: relative;
+        margin: 0 20px;
+        font-size: large;
+      }
+      .nav ul ul {
+        position: absolute;
+        visibility: hidden;
+        margin: 10px 0;
+      }
+      .nav ul ul li {
+        list-style: none;
+        color: aqua;
+        cursor: pointer;
+        height: 20px;
+        display: block;
+      }
+      .nav_ul a {
+        color: #999;
+      }
+      .text {
+        margin: 80px auto;
+      }
+      textarea {
+        font-size: 20px;
+        outline: none;
+      }
+      textarea:invalid {
+        border: 2px dashed red;
+      }
+      textarea {
+        border: 1px solid rgb(0, 81, 255);
+        border-radius: 10px;
+        margin: 0 2px 0px 20px;
+      }
+
+      textarea:valid {
+        border: 1px solid rgb(0, 81, 255);
+      }
+      .text ul li {
+        background-color: whitesmoke;
+        height: 50px;
+        text-align: center;
+        padding: 5px 10px;
+        margin: 10px 0;
+        line-height: 50px;
+      }
+      .text button {
+        cursor: pointer;
+        margin-left: 10px;
       }
     </style>
   </head>
@@ -243,6 +311,48 @@
         <div>第5个模块</div>
       </div>
     </div>
+    <div class="nav">
+      <ul class="nav_ul">
+        <li>
+          <a href="#">微博</a>
+          <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">斗鱼</a>
+          <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">抖音</a>
+          <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+          </ul>
+        </li>
+        <li>
+          <a href="#">虎牙</a>
+          <ul>
+            <li>1</li>
+            <li>2</li>
+            <li>3</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="text">
+      <textarea name="" id="" cols="100" rows="10"></textarea>
+      <button class="hvr-grow">发布</button>
+      <ul></ul>
+    </div>
+
     <script>
       var eyeEle = document.querySelector("img");
       var inputEle = document.querySelector("input");
@@ -341,6 +451,41 @@
           tab_content[i].setAttribute("class", "currentcontent");
         };
       }
+      var nav_ul = document.querySelector(".nav_ul");
+      console.log(nav_ul.children);
+      for (let i = 0; i < nav_ul.children.length; i++) {
+        nav_ul.children[i].onmouseover = function () {
+          nav_ul.children[i].children[1].style.visibility = "visible";
+        };
+        nav_ul.children[i].onmouseout = function () {
+          nav_ul.children[i].children[1].style.visibility = "hidden";
+        };
+      }
+      var text_sub = document.querySelector(".text");
+      var text_button = text_sub.querySelector("button");
+      var text_ul = text_sub.querySelector("ul");
+      var now = new Date();
+      console.log(now.getDate);
+      text_button.onclick = function () {
+        if (text_sub.firstElementChild.value !== "") {
+          var li = document.createElement("li");
+          li.innerHTML =
+            text_sub.firstElementChild.value +
+            "\n  " +
+            " " +
+            "发表时间: " +
+            now.getFullYear() +
+            "年" +
+            now.getMonth() +
+            "月" +
+            now.getDate() +
+            "日";
+          text_ul.insertBefore(li, text_ul.firstElementChild);
+        } else {
+          alert("输入为空");
+        }
+        text_sub.firstElementChild.value = "";
+      };
     </script>
   </body>
 </html>
