@@ -20,8 +20,9 @@
    </details>
       <details>
       <summary>Web APIs</summary>
+
 * [DOM](#dom)
-      </details>
+</details>
 </details>
 
 ## javascript 基础
@@ -277,7 +278,7 @@ js 引擎执行代码顺序：预解析+代码逐行执行。
       this.sex=sex;
       this.age=age;
    }
-   var zy= new Star('zy','sex',age);
+   var zy= new Star('zy','sex','age');
    ```
 
    !!!note 1.为区分普通函数，构造函数的命名首字母需要大写，也没有 return
@@ -487,18 +488,52 @@ Web API：是操作浏览器功能和页面元素的 API
       element.getAttribute('属性')(类是 class)可以获取开发中的自定义属性，element.setAttribute('属性','值')可以修改自定义属性,element.removeAttribute('属性')
    8. 自定义属性：获取和使用数据
       标准格式是'data-属性'，这种格式的属性放在 dataset 这个集合中，可通过`element.dataset.属性`来获得。对于长的属性名，如 data-index-name:''这种还有-的属性名，应该用 element.dataset.indexName 来获得(驼峰命名法)
-   
 1. 节点操作
    利用节点(node)之间的层级关系获取元素
    1. 节点属性
-   节点类型(nodeType):元素节点(1),属性节点(2),文本节点(3)包括文字空格换行
-   节点名称(nodeName)
-   节点值(nodeValue)
-   2. 父节点：node.parentNode获得离本元素最近的父级元素，没有返回null
-   3. 子节点：（用li这种，好获取）
-      * parentNode.childNodes返回的是所有的子节点，包含了换行等文本节点
-      * parentNode.children可以获取所有的元素子节点
-      * node.firstChild和node.lastChild获取子节点包括文本节点，node.firstElemtChild和node.lastElementChild返回元素节点。一般获取这两种节点考虑兼容性问题还是使用node.children[]这个数组获取
-   4. 兄弟节点：nextSibling和previousSibling获得兄弟节点，包括文本节点。nextElementSibling和previousElementSibling获得元素兄弟节点
+      节点类型(nodeType):元素节点(1),属性节点(2),文本节点(3)包括文字空格换行
+      节点名称(nodeName)
+      节点值(nodeValue)
+   2. 父节点：node.parentNode 获得离本元素最近的父级元素，没有返回 null
+   3. 子节点：（用 li 这种，好获取）
+      - parentNode.childNodes 返回的是所有的子节点，包含了换行等文本节点
+      - parentNode.children 可以获取所有的元素子节点
+      - node.firstChild 和 node.lastChild 获取子节点包括文本节点，node.firstElemtChild 和 node.lastElementChild 返回元素节点。一般获取这两种节点考虑兼容性问题还是使用 node.children[]这个数组获取
+   4. 兄弟节点：nextSibling 和 previousSibling 获得兄弟节点，包括文本节点。nextElementSibling 和 previousElementSibling 获得元素兄弟节点
    5. 创建节点：document.createElement('tag')创建一个元素节点（主要用于留言）
-   6. 添加节点：node.appendChild(child)添加child到父节点的最末尾，类似css中的after。node.InsertBefore(child,指定元素)添加元素节点到指定元素的前面
+   6. 添加节点：node.appendChild(child)添加 child 到父节点的最末尾，类似 css 中的 after。node.InsertBefore(child,指定元素)添加元素节点到指定元素的前面
+   7. 删除节点：parentnode.removeChild()
+   8. 复制节点:node.cloneNode()如果括号中为空或 false，则是浅拷贝，只复制标签不复制内容，node.cloneNode(true)复制标签和内容
+   ```javascript
+   function Dataset(name, sex, subject, value) {
+     this.name = name;
+     this.sex = sex;
+     this.subject = subject;
+     this.value = value;
+   }
+   var datas = [
+     new Dataset("zy", "male", "javascript", 98),
+     new Dataset("zyf", "female", "math", 100),
+     new Dataset("sy", "male", "gao", 100),
+     new Dataset("sky", "male", "whild", 100),
+   ];
+   var t_tbody = document.querySelector("#tab-content");
+   for (let i = 0; i < datas.length; i++) {
+     var tr = document.createElement("tr");
+     t_tbody.appendChild(tr);
+     for (let k in datas[i]) {
+       var td = document.createElement("td");
+       tr.appendChild(td);
+       td.innerHTML = datas[i][k];
+     }
+     var td = document.createElement("td");
+     td.innerHTML = "<a href='javascript:;' class='hvr-shrink'>drop</a>";
+     tr.appendChild(td);
+   }
+   var drop_value = t_tbody.querySelectorAll("a");
+   for (let i = 0; i < datas.length; i++) {
+     drop_value[i].onclick = function () {
+       t_tbody.removeChild(this.parentNode.parentNode);
+     };
+   }
+   ```

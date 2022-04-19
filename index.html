@@ -13,6 +13,24 @@
         padding: 0px;
         box-sizing: border-box;
       }
+      .hvr-shrink {
+        display: inline-block;
+        vertical-align: middle;
+        -webkit-transform: perspective(1px) translateZ(0);
+        transform: perspective(1px) translateZ(0);
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+        -webkit-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        -webkit-transition-property: transform;
+        transition-property: transform;
+        color: #65dfc9;
+      }
+      .hvr-shrink:hover,
+      .hvr-shrink:focus,
+      .hvr-shrink:active {
+        -webkit-transform: scale(0.8);
+        transform: scale(0.8);
+      }
       .load {
         border-bottom: 1px solid rgba(0, 0, 0, 0.2);
         width: 400px;
@@ -188,6 +206,12 @@
         cursor: pointer;
         margin-left: 10px;
       }
+      .re {
+        float: right;
+        color: dodgerblue;
+        margin-right: 20px;
+        line-height: 50px;
+      }
     </style>
   </head>
   <body>
@@ -352,6 +376,18 @@
       <button class="hvr-grow">发布</button>
       <ul></ul>
     </div>
+    <div class="datatab">
+      <table>
+        <thead id="tab-list">
+          <th>name</th>
+          <th>sex</th>
+          <th>subject</th>
+          <th>score</th>
+          <th>remove</th>
+        </thead>
+        <tbody id="tab-content"></tbody>
+      </table>
+    </div>
 
     <script>
       var eyeEle = document.querySelector("img");
@@ -479,13 +515,51 @@
             now.getMonth() +
             "月" +
             now.getDate() +
-            "日";
+            "日" +
+            "<a href='javascript:;' class = 're'>删除</a>";
           text_ul.insertBefore(li, text_ul.firstElementChild);
+          var re = document.querySelectorAll(".re");
+          for (let i = 0; i < re.length; i++) {
+            re[i].onclick = function () {
+              text_ul.removeChild(this.parentNode);
+            };
+          }
         } else {
           alert("输入为空");
         }
         text_sub.firstElementChild.value = "";
       };
+      function Dataset(name, sex, subject, value) {
+        this.name = name;
+        this.sex = sex;
+        this.subject = subject;
+        this.value = value;
+      }
+      var datas = [
+        new Dataset("zy", "male", "javascript", 98),
+        new Dataset("zyf", "female", "math", 100),
+        new Dataset("sy", "male", "gao", 100),
+        new Dataset("sky", "male", "whild", 100),
+      ];
+      var t_tbody = document.querySelector("#tab-content");
+      for (let i = 0; i < datas.length; i++) {
+        var tr = document.createElement("tr");
+        t_tbody.appendChild(tr);
+        for (let k in datas[i]) {
+          var td = document.createElement("td");
+          tr.appendChild(td);
+          td.innerHTML = datas[i][k];
+        }
+        var td = document.createElement("td");
+        td.innerHTML = "<a href='javascript:;' class='hvr-shrink'>drop</a>";
+        tr.appendChild(td);
+      }
+      var drop_value = t_tbody.querySelectorAll("a");
+      for (let i = 0; i < datas.length; i++) {
+        drop_value[i].onclick = function () {
+          t_tbody.removeChild(this.parentNode.parentNode);
+        };
+      }
     </script>
   </body>
 </html>
