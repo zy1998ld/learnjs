@@ -510,7 +510,7 @@ Web API：是操作浏览器功能和页面元素的 API
      this.sex = sex;
      this.subject = subject;
      this.value = value;
-   }
+   } //数据一般按照对象的格式保存
    var datas = [
      new Dataset("zy", "male", "javascript", 98),
      new Dataset("zyf", "female", "math", 100),
@@ -526,7 +526,7 @@ Web API：是操作浏览器功能和页面元素的 API
        tr.appendChild(td);
        td.innerHTML = datas[i][k];
      }
-     var td = document.createElement("td");
+     var td = document.createElement("td"); //注意写在循环里
      td.innerHTML = "<a href='javascript:;' class='hvr-shrink'>drop</a>";
      tr.appendChild(td);
    }
@@ -537,3 +537,32 @@ Web API：是操作浏览器功能和页面元素的 API
      };
    }
    ```
+   9.创建新元素的方法比较
+      1. document.write()在文档流加载完毕之后，会重新渲染界面，只保留document.write()创建的元素
+      2. document.createElement()和innerHtml中当创建多个元素的时候，后者是按照字符串的形式连接，效率很低，但是将元素放入数组之中后再创建效率就会优于前者
+### DOM核心
+1. 事件高级
+   1. 注册事件的两种方式
+   - 传统方法：事件源.注册时间=函数。同一个元素同一个事件只能注册一个事件
+   - 方法监听注册方式：addEventListener()可按照注册事件依次执行，低版本ie用attachEvent('onclick'，fn)，移除用detachEvent()
+   eventTarget.addEventListener(type,listener[,useCapture])
+   `type`:事件类型，是一个**字符串**，如'click'等
+   `listener`：事件侦听器，相当于传统方法的function，调用函数时不需要()只写`fn`
+   `useCapture`:Boolean，默认false。注册了listener的元素，是否要先于它下面的EventTarget，调用该listener。当useCapture（设为true）时，沿着DOM树向上冒泡的事件，不会触发listener
+   2. 删除解绑事件
+   - 传统：事件源.事件类型 = null
+   - targetEvent.removeEventListener('type',listener)
+
+2. 事件流(捕获阶段+当前目标阶段(获取事件的元素)+冒泡阶段)：用于多个事件
+![事件流](imgs/事件流.png)
+
+!!!note 1.js代码只会处于捕获或者冒泡中的一个阶段
+!!!note 2.onclick和attachEvent只能得到冒泡阶段
+!!!note 3.addEventListener()中的第三个参数false或者不写就是冒泡阶段，true指捕获阶段
+!!!note 4.实际开发中只考虑事件冒泡，不考虑事件捕获
+!!!note 5.有些事件没有冒泡，如onblur、onfocus、onmouseenter、onmouseleave
+3. 事件对象
+   事件对象是放在事件侦听器中的，fn(event)中的event(或者写e)就是事件对象，当事件发生之后，就会将事件发生时的一系列数据信息(事件源，鼠标位置等)保存在event这个对象之中。这个不需要实参。ie低版本用的是Window.event考虑兼容性写法，可将形参`e = e || window.event`
+   - 事件对象中的属性e.target返回触发事件源，this是绑定事件源。ul中嵌套li时，给ul注册点击事件后，点击li的话e.target返回li，this返回ul元素
+   - this约等于事件对象中的event.current
+   - e.type返回事件类型，e.preventDefault()可以阻止默认行为，如点击链接跳转，低版本ie用e.returnValse属性，或者函数中写return false用于传统的注册方法，之后的所有代码都不会再执行
