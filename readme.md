@@ -18,11 +18,11 @@
 - [对象](#对象)
 - [内置对象](#内置对象)
    </details>
-      <details>
+       <details>
       <summary>Web APIs</summary>
-
 * [DOM](#dom)
-</details>
+* [BOM](#bom)
+      </details>
 </details>
 
 ## javascript 基础
@@ -566,3 +566,35 @@ Web API：是操作浏览器功能和页面元素的 API
    - 事件对象中的属性e.target返回触发事件源，this是绑定事件源。ul中嵌套li时，给ul注册点击事件后，点击li的话e.target返回li，this返回ul元素
    - this约等于事件对象中的event.current
    - e.type返回事件类型，e.preventDefault()可以阻止默认行为，如点击链接跳转，低版本ie用e.returnValse属性，或者函数中写return false用于传统的注册方法，之后的所有代码都不会再执行
+4. 事件委托
+   1. 原理：当给父元素（ul）设置事件监听时，子元素（li）触发事件监听时，会通过事件冒泡，传播到父元素，同时可通过e.target获取触发事件的元素，这样就不需要给每个子元素设置DOM
+   2. 阻止事件冒泡：当父子元素设置同样的事件监听器时，子元素触发之后会冒泡传播到父元素，但是如果实际不需要的话，可通过设置e.stoppropagation()来阻止事件的冒泡
+   3. 阻止默认行为，在超链接和表单提交中，会有默认的点击跳转和提交功能，如果不需要这些默认行为的话，可通过设置e.preventDefault()来阻止
+   4. 阻止右键菜单和文本选中复制,document.addEventListener('contextmunu',function(e){e.preventDefault();});阻止右键菜单，换成'selectstart'阻止文本选中，但是仍然可以通过浏览器的开发者模式复制
+5. 鼠标键盘事件
+   1. 鼠标事件对象MouseEvent，其中e.clientX和e.clientY获取浏览器可视区(不包括控制台)的坐标，坐标系同css，e.pageX是相对于页面文档的坐标，用途多一些。e.screenX是相对于电脑屏幕的坐标。mousemmove是鼠标移动一像素触发的事件。
+   2. 键盘事件对象keyboardEvent，onkeyup,onkeydown不能识别大小写，获得的ASCII码相同,onkeypress能识别大小写，不识别功能键，如ctrl，shift等。执行顺序keydown-keypress-keyup。键盘对象的ASCII码存储在e.keyCode，但是这一属性要被删除了，使用e.Key和e.Code获取更好
+   3. 键盘按下事件会比文本框之后一个字符，因为按下事件触发之后，文本才会录入，可以用keyup解决
+
+### BOM
+BOM是浏览器对象模型,操作对象是浏览器（window），是完成浏览器交互的核心，最顶级对象是window。但是BOM没有BOM和ECMAscript这么规范，兼容性也不同，标准是各个浏览器厂商自己制定。
+1. bom对象的构成![BOM](imgs/bom%E5%AF%B9%E8%B1%A1.png)
+   1. bom的顶级对象是window，具有双重角色
+      1. 是JavaScript访问浏览器的接口
+      1. 是**全局对象**，全局变量和全局函数都会转化为window对象的属性和方法，平时调用时均省略了`window.`，包括DOM的函数和变量，例如`window.document`和`window.alert()`
+   1. 页面加载事件
+   页面加载事件是在整个页面加载之后触发的事件，传统是`window.onload`，也可用`window.addEventListener('load',fun(){})`来注册，由于是最后触发的，所以这个代码放在code的任意位置都行，同时传统方法如果注册了多个的话，只会按顺序执行最后一个。
+   在实际有很多图片的页面中，也可只先加载主要的DOM，先不加载图片和CSS，然后触发事件，可用document中的DOMContentLoaded，这种方法比window加载页面更快，所以会先执行
+   2. 浏览器窗口事件
+   resize可获取浏览器窗口大小调整触发事件，window.innerwidth获取浏览器的宽度，没有单位
+   1. 计时器
+   `[window.]setTimeOut(function,[,毫秒])`用于浏览器延迟触发。调用window的属性和方法是基本都可以省略`window`不写，时间的单位必须是毫秒，默认是0.界面中如果有很多的定时器的话，可以添加标识符（定义变量）来区分
+   > 回调函数：不立即调用的函数callback()，普通函数是按照顺序直接调用，回调函数需要等待一段时间，再**回头**调用，包括点击click这些事件
+
+   `clearTimeOut(timeId)`可用来清除定时器,timeId是定时器的标识符（变量）
+   `setInterval(回调函数[,间隔毫秒数])`用于每隔一段时间就去重复调用回调函数。同样一般需要设置标识符。清除用`clearInterval`。
+
+ !!!note 里面回调函数如果是外部函数调用不要加()，同时在里面写函数的时候，要定义函数或者用``包裹，只写`console.log()`就只会触发一次
+ !!!note 删除计时器的话，由于一般计时器的定义是在开始事件中，会在一个函数局部作用域中，不能用在删除事件。可在全局作用域中定义`var timeID= null;`来解决
+  this的指向问题
+2. this的指向问题有三种情况。在普通函数和全局作用域（包括计时器）中的this都指向window，因为实际都省略了window，在方法调用中，this指向调用对象，如btn.onclick就是btn，但是如果btn下再定义新的函数，而不是指向btn就不能在里面用this替换；在构造函数中this指向实例对象
