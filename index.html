@@ -245,14 +245,17 @@
   </head>
   <body>
     <div class="load">
-      <label for="">密码</label>
-      <input type="password" name="" id="" placeholder="输入密码" />
-      <a href="#"><img src="imgs/arria.jpg!ys" alt="" /></a>
-      <br />
-      <label for="">用户</label>
-      <input type="text" name="" id="hosname" value="输入用户名" />
-
-      <span></span>
+      <form action="load.html">
+        <label for="">密码</label>
+        <input type="password" name="password" id="" placeholder="输入密码" />
+        <a href="#"><img src="imgs/arria.jpg!ys" alt="" /></a>
+        <br />
+        <label for="">用户</label>
+        <input type="text" name="host" id="hosname" value="输入用户名" />
+        <br />
+        <br />
+        <input type="submit" value="登录" />
+      </form>
     </div>
     <div class="box">
       <img src="imgs/eye.png" alt="" id="eye" />
@@ -562,7 +565,7 @@
           alert("输入为空");
         }
         text_sub.firstElementChild.value = "";
-        text_button.disabled = true;   //这里的text_button能用this替代
+        text_button.disabled = true; //这里的text_button能用this替代
         var time = 5;
         function timers() {
           if (time > 0) {
@@ -572,7 +575,7 @@
             clearInterval(timer);
             text_button.disabled = false; //这里的text_button不能用this替代
             text_button.innerHTML = "发送";
-            time = 5; 
+            time = 5;
           }
         }
         timers();
@@ -647,6 +650,7 @@
           : (secondr.innerHTML = "0" + nowr.getSeconds());
       }
       setInterval(countdown, 1000);
+
     </script>
   </body>
 </html>

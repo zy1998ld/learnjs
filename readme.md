@@ -598,3 +598,28 @@ BOM是浏览器对象模型,操作对象是浏览器（window），是完成浏�
  !!!note 删除计时器的话，由于一般计时器的定义是在开始事件中，会在一个函数局部作用域中，不能用在删除事件。可在全局作用域中定义`var timeID= null;`来解决
   this的指向问题
 2. this的指向问题有三种情况。在普通函数和全局作用域（包括计时器）中的this都指向window，因为实际都省略了window，在方法调用中，this指向调用对象，如btn.onclick就是btn，但是如果btn下再定义新的函数，而不是指向btn就不能在里面用this替换；在构造函数中this指向实例对象
+3. 同步与异步
+   js的执行机制（单线程）决定了只能同时执行一个任务，只有当这个任务结束之后才会执行下一个，当某个任务需要的时间很长（例如settimeout这种）就会影响整个界面的渲染。
+   目前的js能够使用异步处理，能够多线程执行。下列代码的结果是123
+   ```javascript
+   console.log(1);
+   setTimeout('console.log(3)',1000);
+   console.log(2);
+   ```
+   异步执行机制：将任务划分为同步任务和异步任务，同步任务在主线程上执行，形成一个执行栈，异步任务由回调函数构成，包括一些click，resize等普通函数、load，error等加载事件和计时器，这些会放在任务队列中。在执行时，先执行主线程中的同步任务，遇到异步任务会将其交给异步处理程序，由其决定是否放入消息队列中，如点击事件只有点击之后才会放进任务队列中。当所有的同步任务都执行完毕之后，会将任务队列中的异步任务放入执行栈中执行。所以上述代码就算延迟毫秒是0，输出结果仍然是123。
+   
+   事件循环：同步主程序加载完成之后，仍然会一直关注任务队列中的程序
+   ![事件循环](imgs/%E5%BC%82%E6%AD%A5%E6%9C%BA%E5%88%B6.png)
+
+4. location对象
+用于获取、设置和解析窗口的url，返回一个对象,其中`href`和`search`返回url和参数，另外host\port\pathname\hash返回域名、端口、路径和锚点
+![url](imgs/url.png)
+在提交表单时，form中的action指向新的网页，在这个新的网页能获取form表单中的有name的参数，格式是？name=value&name=value，在这个网页用脚本能获取到各个name和value
+   其他方法：location.assign和location.replace前者相当于href，重新定向新的页面。会有原页面的历史记录，能够回退，后者没有记录，不能后退。location.reload()里面不加参数相当于f5刷新页面，加true是强制刷新相当于ctrl+f5.
+   > 强制刷新：打开之前的页面加载快是因为其在本地缓存，如果不需要的话，可以强制刷新，全部重新加载
+
+5. navigator对象
+navigator能获取用户的设备和软件信息，包括移动端、pc端或者什么浏览器、浏览器版本、设备号等，最重要的是navigator.userAgent![navigator](imgs/navigator.png)
+
+6. history对象
+用于页面历史记录的前进后退，如history.back()和history.forward().history.go(数字参数)能前进后退多个页面
