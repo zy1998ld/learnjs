@@ -623,3 +623,17 @@ navigator能获取用户的设备和软件信息，包括移动端、pc端或者
 
 6. history对象
 用于页面历史记录的前进后退，如history.back()和history.forward().history.go(数字参数)能前进后退多个页面
+ ### 网页特效
+1. offset元素偏移量：能**动态**（浏览器窗口变化时获取方便）获取元素的位置和大小，获取元素距离**定位**父元素的位置，返回的值没有单位。
+   `offsetParent`返回带有定位属性的父元素，没有的话就是body
+   `offsetLeft`和`offsetTop`返回距离定位父元素的位置
+   `offsetWidth`和`offsetLength`返回元素大小，没有单位，width=padding+width+border
+   | <center>offset</center> | <center>style</center> |
+   |---|---|
+   |可以得到任意样式表的样式值|只能得到行内样式的值，写在css中的不能|
+   |获取样式数字值没有单位|获取的字符串：样式值+单位|
+   |样式值包含padding和border|只能获取width|
+   |是只读属性，不能修改|是可读写属性，可以修改|
+   |用于获取元素位置大小|用于修改元素样式值|
+
+
