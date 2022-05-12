@@ -1,4 +1,4 @@
-# css 学习之路 [:mag:](index.html)
+# Javascript学习之路 [:mag:](index.html)
 
 <details> 
 <summary>目录</summary>
@@ -635,5 +635,11 @@ navigator能获取用户的设备和软件信息，包括移动端、pc端或者
    |样式值包含padding和border|只能获取width|
    |是只读属性，不能修改|是可读写属性，可以修改|
    |用于获取元素位置大小|用于修改元素样式值|
+2. client系列：clientWidth和clientHeight同offset，但是不含边框，只有padding+width，clientTop和clientLeft返回边框的大小
+3. 立即执行函数，`(function(){})()`和`(function(){}())`独立创建了一个作用域，里面的变量都是局部变量，相互之间不会有影响。dpr是物理像素比，pc端是1，移动端是2; `window.devicePixelRatio`
+4.scroll系列:scrollHeight,scrollTop,scrollLeft等，还有scroll事件
+![scroll](imgs/scroll.png)
 
+!!!note 元素被卷去的大小是element.scrollTop，浏览器页面被卷去的大小是window.pageYOffset
+mouseover经过里面的子盒子也会触发事件（冒泡），mouseenter和mouseleave不会冒泡，只有经过添加事件的盒子
 

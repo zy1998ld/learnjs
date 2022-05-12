@@ -1,0 +1,23 @@
+{
+  "name": "learnjs",
+  "version": "1.0.0",
+  "description": "<details> \r <summary>目录</summary>\r    <details>\r    <summary>基础</summary>",
+  "main": "js.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zy1998ld/learnjs.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zy1998ld/learnjs/issues"
+  },
+  "homepage": "https://github.com/zy1998ld/learnjs#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
