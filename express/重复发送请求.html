@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>重复发送请求</title>
+    <style>
+      #result {
+        width: 300px;
+        height: 200px;
+        border: 1px solid #555;
+      }
+    </style>
+  </head>
+  <body>
+    <button>点击请求</button>
+    <button>点击取消</button>
+    <div id="result"></div>
+    <script>
+      // 思路是当有多个请求时，判断是否正在发送，是的话就取消原请求
+      // 1. 创建标识变量
+      // 2. 当触发事件后，就判断是否正在发送请求
+      // 3. 在事件中修改标识变量的值，判断其正在发送
+      // 4. 当阶段是4的话就不需要了，此处不需要判断状态，因为状态一般都没完成
+      const btn = document.querySelectorAll("button");
+      const result = document.getElementById("result");
+      let xhr = null;
+      // 创建标识变量
+      let issending = false; //判断是否正在发送ajax请求
+
+      btn[0].addEventListener("click", function () {
+        if (issending) xhr.abort(); //如果正在发送就取消请求
+        xhr = new XMLHttpRequest();
+        xhr.open("GET", "http://127.0.0.1:8000/server-timeout");
+        xhr.send();
+        issending = true; // 修改标识变量值
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            issending = false; //成功发送请求时
+            if (xhr.status >= 200 && xhr.status < 300) {
+              result.innerHTML = xhr.response;
+            }
+          }
+        };
+      });
+
+      // 取消的话要先将xhr放入全局作用域,由于要变更，就用let定义
+      // 取消方法是xhr.abort()
+      btn[1].onclick = function () {
+        xhr.abort();
+      };
+    </script>
+  </body>
+</html>

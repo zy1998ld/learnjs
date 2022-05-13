@@ -27,9 +27,15 @@
       const xhr = new XMLHttpRequest();
 
       // 2. 初始化 设置请求方法和url
-      xhr.open("GET", "http://127.0.0.1:8000/server");
+      xhr.open("POST", "http://127.0.0.1:8000/server");
+      // 针对IE的缓存问题，导致ajax页面不刷新，可以在url后+date.now()让其识别为不同时间的请求
+      // xhr.open('GET','http://127.0.0.1:8000/server/ie?t='+Date.now())
+      // 设置请求头
+      xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      xhr.setRequestHeader("name", "zhuyang"); //自定义的，用于用户身份的验证，需要在js中加对应接受所有响应头
 
       // 3. 发送
+      //post请求设置参数，a=value&b=value&c=value，get请求没有，直接放在初始化的url中
       xhr.send();
 
       // 4. 事件绑定，处理服务器返回的结果

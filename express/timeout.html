@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>网络超时</title>
+    <style>
+      #result {
+        width: 300px;
+        height: 200px;
+        border: 1px solid #555;
+      }
+    </style>
+  </head>
+  <body>
+    <button>点击请求</button>
+    <button>点击取消</button>
+    <div id="result"></div>
+    <script>
+      const btn = document.querySelectorAll("button");
+      const result = document.getElementById("result");
+      let xhr = null;
+
+      btn[0].addEventListener("click", function () {
+        xhr = new XMLHttpRequest();
+        // xhr.responseType = "json";
+
+        // 超时设置，在open前,可设置回调函数
+        xhr.timeout = 2000;
+        xhr.ontimeout = function () {
+          alert("请求超时了");
+        };
+
+        // 网络错误设置回调函数
+        xhr.onerror = function () {
+          alert("没网了");
+        };
+
+        xhr.open("GET", "http://127.0.0.1:8000/server-timeout");
+        xhr.send();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+              result.innerHTML = xhr.response;
+            }
+          }
+        };
+      });
+
+      // 取消的话要先将xhr放入全局作用域,由于要变更，就用let定义
+      // 取消方法是xhr.abort()
+      btn[1].onclick = function () {
+        xhr.abort();
+      };
+    </script>
+  </body>
+</html>

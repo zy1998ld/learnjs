@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>json ajax</title>
+    <style>
+      #result {
+        width: 200px;
+        height: 100px;
+        border: 1px solid #333;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="result"></div>
+    <script>
+      const result = document.querySelector("#result");
+      window.addEventListener("keydown", function () {
+        const xhr = new XMLHttpRequest();
+        xhr.responseType = "json"; //自动转换必须
+        xhr.open("GET", "http://127.0.0.1:8000/json-server");
+        xhr.setRequestHeader(
+          "Content-Type",
+          "application/x-www-form-urlencoded"
+        );
+        xhr.setRequestHeader("name", "zhuyang");
+        xhr.send();
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState === 4) {
+            if (xhr.status >= 200 && xhr.status < 300) {
+              // 手动转换 由于send的是字符串，要用JSON。parse将其转换成对象
+              //   let data = JSON.parse(xhr.response);
+              //   console.log(data);
+              //   console.log(xhr.response);
+
+              // 自动转换  要先将xhr的响应类型数据设置为json就行
+              result.innerHTML = xhr.response.name;
+              console.log(xhr.response);
+            }
+          }
+        };
+      });
+    </script>
+  </body>
+</html>
